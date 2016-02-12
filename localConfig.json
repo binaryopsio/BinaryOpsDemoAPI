@@ -1,0 +1,10 @@
+{
+  "api_code"    :"mauj32",
+  "tenant_code" : "y1lzxl",
+  "functionFile"    : "uppercaseTags.js",
+  "args"        : {
+	  "tags":"Testing 123 four five SIX",
+	  "ispublised":false,
+	  "postcontent":"Here is the text of the post"
+  }
+}

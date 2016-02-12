@@ -41,6 +41,7 @@
 				{
 					"code": "post",
 					"name": "Post",
+					"presave": "uppertag",
 					"attributes": [
 						{
 							"name": "Title",
@@ -92,6 +93,14 @@
 				}
 			]
 		},
+		"functions":[
+			{
+		    "code": "uppertag",
+		    "endpoint_active":false,
+		    "source":"uppercaseTags.js",
+		    "authentication":""
+		}
+			],
 		"notifications": "Coming Soon!",
 		"pubsub": "Coming Soon!",
 		"files": "Coming Soon!",
@@ -153,6 +162,14 @@
 					"secured_object_type": "query",
 					"secured_object_code": "qrygeneralposts",
 					"privileges": "R"
+				}
+				,
+				{
+					"code": "uppertagexec",
+					"name": "Execute uppertag",
+					"secured_object_type": "function",
+					"secured_object_code": "uppertag",
+					"privileges": "X"
 				}
 			]
 		}
