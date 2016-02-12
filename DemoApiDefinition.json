@@ -1,0 +1,160 @@
+{
+	"note": "default api definition",
+	"api_definition": {
+		"api_version": 1,
+		"api_description": "",
+		"api_context": {
+			"contact_name": "",
+			"contact_email": "",
+			"contact_url": "",
+			"license_url": "",
+			"license_name": "",
+			"terms_of_service_url": ""
+		},
+		"db": {
+			"//": "Pk and audit fields added automatically",
+			"entities": [
+				{
+					"code": "blog",
+					"name": "Blog",
+					"attributes": [
+						{
+							"name": "Title",
+							"code": "title",
+							"required": true,
+							"datatype": "string"
+						},
+						{
+							"name": "Sub title",
+							"code": "subtitle",
+							"required": false,
+							"datatype": "string"
+						},
+						{
+							"name": "Allows Comments",
+							"code": "allowscomments",
+							"required": true,
+							"datatype": "boolean"
+						}
+					]
+				},
+				{
+					"code": "post",
+					"name": "Post",
+					"attributes": [
+						{
+							"name": "Title",
+							"code": "title",
+							"required": true,
+							"datatype": "string"
+						},
+						{
+							"name": "Post Content",
+							"code": "postcontent",
+							"required": true,
+							"datatype": "string"
+						},
+						{
+							"name": "Blog ID",
+							"code": "blogid",
+							"required": true,
+							"datatype" : "connector",
+                            "connect_entity" : "blog"
+						},
+						{
+							"name": "Is Published",
+							"code": "ispublished",
+							"required": true,
+							"datatype": "boolean"
+						},
+						{
+							"name": "Posted By",
+							"code": "postedby",
+							"required": false,
+							"datatype": "string",
+							"default":"CURRENT_USERNAME"
+						},
+						{
+							"name": "Tags",
+							"code": "tags",
+							"required": false,
+							"datatype": "string"
+						}
+					]
+				}
+			],
+			"queries": [
+				{
+					"code": "qrygeneralposts",
+					"name": "General Posts",
+					"entity": "post",
+					"query_string": "name=~general"
+				}
+			]
+		},
+		"notifications": "Coming Soon!",
+		"pubsub": "Coming Soon!",
+		"files": "Coming Soon!",
+		"security": {
+			"groups": [
+				{
+					"name": "All Privs",
+					"code": "allprivs",
+					"apply_to_new_users": false,
+					"roles": [
+						"blogreadrole",
+						"blogeditrole",
+						"postreadrole",
+						"posteditrole"
+					]
+				},
+				{
+					"name": "Read Only",
+					"code": "allread",
+					"apply_to_new_users": true,
+					"roles": [
+						"blogreadrole",
+						"postreadrole"
+					]
+				}
+			],
+			"roles": [
+				{
+					"code": "blogreadrole",
+					"name": "Blog Read",
+					"secured_object_type": "entity",
+					"secured_object_code": "blog",
+					"privileges": "R"
+				},
+				{
+					"code": "blogeditrole",
+					"name": "Blog Edit",
+					"secured_object_type": "entity",
+					"secured_object_code": "blog",
+					"privileges": "CRUD"
+				},
+				{
+					"code": "postreadrole",
+					"name": "Post Read",
+					"secured_object_type": "entity",
+					"secured_object_code": "post",
+					"privileges": "R"
+				},
+				{
+					"code": "posteditrole",
+					"name": "Address Edit",
+					"secured_object_type": "entity",
+					"secured_object_code": "post",
+					"privileges": "CRUD"
+				},
+				{
+					"code": "qrygeneralpostsread",
+					"name": "QRY General Posts Read",
+					"secured_object_type": "query",
+					"secured_object_code": "qrygeneralposts",
+					"privileges": "R"
+				}
+			]
+		}
+	}
+}
